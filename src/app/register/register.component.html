@@ -1,0 +1,26 @@
+<body class="text-center">
+  <main class="form-signin">
+    <form [formGroup]="form" (submit)="submit()">
+      <i style="font-size: 50px;" class="fas fa-key mb-4"></i>
+      <h1 class="h3 mb-5 fw-normal">Password Manager</h1>
+      <div class="input-group mb-1">
+        <input formControlName="firstname" type="text" placeholder="Firstname" class="form-control">
+        <input formControlName="lastname" type="text" placeholder="Lastname" class="form-control">
+      </div>
+      <div class="form-floating">
+        <input formControlName="email" type="email" class="form-control" id="floatingEmail" placeholder="john@doe.com">
+        <label for="floatingEmail">Email Address</label>
+      </div>
+      <div class="form-floating">
+        <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-success" type="submit">Sign Up</button>
+      <p class="mt-5 mb-3 text-muted">Already have an account?
+        <a style="text-decoration-line: none;" routerLink="/">Sign-In!</a>
+      </p>
+    </form>
+  </main>
+
+</body>

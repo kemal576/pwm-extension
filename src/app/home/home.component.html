@@ -1,0 +1,106 @@
+<h2 class="text-center my-4">Your Logins:</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><button class="btn btn-sm btn-success" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">Add</button></th>
+      <th scope="col">Site</th>
+      <th scope="col">Identity</th>
+      <th scope="col">Password <button class="btn btn-sm btn-primary" (click)="ShowHidePw()"><i class="fas fa-eye"></i></button></th>
+      <th scope="col">Last Updated:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let login of logins;  let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td><a style="text-decoration-line: none;" href="https://{{login.url}}">{{login.url}}</a></td>
+      <td>{{login.identity}}</td>
+      <td>
+        <input class="pw-input" style="width: 5rem; border: none;" type="password" value="{{login.password}}" disabled>
+      </td>
+      <td>{{calculateDiff(login)}}</td>
+      <td><button (click)="InsertEditModal(login)" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+          data-bs-target="#exampleModal2">Edit</button>
+      </td>
+      <td><button (click)="DeleteLogin(login.id)" class="btn btn-sm btn-danger">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <form [formGroup]="createForm" (submit)="CreateLogin()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create New Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text w-25" id="basic-addon1">Site</span>
+            <input formControlName="url" type="text" class="form-control" placeholder="www.example.com"
+              aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text w-25" id="basic-addon1">Identity</span>
+            <input formControlName="identity" type="text" class="form-control" placeholder="Email or Username"
+              aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text w-25" id="basic-addon1">Password</span>
+            <input formControlName="password" type="password" class="form-control" placeholder="************"
+              aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <form [formGroup]="editForm" (submit)="EditLogin()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <input id="editId" formControlName="id" type="hidden">
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text w-25" id="basic-addon1">Site</span>
+            <input id="editUrl" formControlName="url" type="text" class="form-control" placeholder="www.example.com"
+              aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text w-25" id="basic-addon1">Identity</span>
+            <input id="editIdentity" formControlName="identity" type="text" class="form-control"
+              placeholder="Email or Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text w-25" id="basic-addon1">Password</span>
+            <input id="editPassword" formControlName="password" type="password" class="form-control"
+              placeholder="************" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-warning">Update</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

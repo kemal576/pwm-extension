@@ -15,8 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.ts"
+            },
             "outputPath": "dist/pwm-extension",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -24,12 +27,18 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.json"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/alertifyjs/build/alertify.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -51,7 +60,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "none"
             },
             "development": {
               "buildOptimizer": false,
